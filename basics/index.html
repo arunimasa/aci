@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+ 
+<body>
+ 
+    <main class="main">
+ 
+        <h1 style="text-align: center;">Patient Registrtion form</h1>
+        <a href="portfolio.html"> POrtfolio </a>
+        <div class="container">
+            <div>
+                <!-- form goes here -->
+                 <h1 class="Priyanti">Patient Form</h1>
+                <form action="">
+                    <label for="fname"> First Name : </label>
+                    <input type="text" name="fname" placeholder="eg. David"> <br> <br>
+                    <label for="lname"> Last Name : </label>
+                    <input type="text" name="lname" placeholder="eg. David"> <br> <br>
+                    <label for="uname"> User Name : </label>
+                    <input type="text" name="uname" placeholder="eg. David"> <br> <br>
+ 
+                    <label for="age"> Age : </label>
+                    <input type="number" name="age"> <br> <br>
+ 
+                    <label for="gender">Gender : </label>
+                    <input type="radio" name="gender" id="" value="male"> Male
+                    <input type="radio" name="gender" id="" value="female"> Female
+                    <input type="radio" name="gender" id="" value="other"> Others
+                    <br> <br>
+ 
+                    <label for="slot">Preferable Slot</label>
+                    <select name="slot" id="">
+                        <option value="none">--select--</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                    </select>
+                    <br> <br>
+ 
+                    <label for="description">Description : </label> <br>
+                    <textarea name="description" id=""></textarea>
+                    <br> <br>
+                    <input type="checkbox" name="terms" id="">
+                    <label for="terms">Accept the terms and conditions</label>
+                    <br> <br>
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+ 
+            <div>
+                <!-- table -->
+                 <h1 class="Priyanti">Doctors</h1>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Anesthesia</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Anesthesia</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Anesthesia</td>
+                            <td>Available</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Anesthesia</td>
+                            <td>Available</td>
+                        </tr>
+                    </tbody>
+                 </table>
+            </div>
+        </div>
+    </main>
+ 
+</body>
+<script>
+    console.log("Hello js")
+</script>
+</html>

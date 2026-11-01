@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Our own CSS (after Bootstrap) -->
+    <!-- <style>
+        body {
+            background-color: #eef3f1;
+        }
+
+        .navbar {
+            background-color: #0f5c5c;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 6px solid #0f5c5c;
+        }
+
+        h1 {
+            color: #0f5c5c;
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <!-- navbar-expand-lg: menu is horizontal on large screens, collapses into a button on small screens -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+
+            <!-- Website name -->
+            <a class="navbar-brand" href="#">Patient Care</a>
+
+            <!-- Menu button (shows only on mobile) -->
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu links (ms-auto pushes them to the right) -->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- ================= FORM WITH GRID ================= -->
+    <div class="container mt-4 mb-5">
+
+        <h1 class="text-center mb-4">Patient Registration</h1>
+
+        <div class="form-box">
+
+            <form>
+
+                <!--
+                    GRID RULES:
+                    - A "row" has 12 columns in total.
+                    - col-md-6 = 6 of 12 columns = half width (2 fields per row) on medium screens and up.
+                    - col-md-4 = 4 of 12 columns = one third (3 fields per row).
+                    - col-12   = full width.
+                    - On phones, every column becomes full width automatically.
+                -->
+
+                <!-- Row 1: two columns (6 + 6 = 12) -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="fname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="fname" placeholder="e.g. David" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lname" placeholder="e.g. Smith" required>
+                    </div>
+                </div>
+
+                <!-- Row 2: three columns (4 + 4 + 4 = 12) -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" placeholder="Enter your age" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="e.g. 01712345678" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="blood" class="form-label">Blood Group</label>
+                        <select class="form-select" id="blood">
+                            <option value="">-- Select --</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 3: one full-width column -->
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    </div>
+                </div>
+
+                <!-- Row 4: gender (6) + department (6) -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Gender</label>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="male">
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="female">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="other">
+                            <label class="form-check-label" for="other">Other</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <select class="form-select" id="department" required>
+                            <option value="">-- Select --</option>
+                            <option>General Medicine</option>
+                            <option>Cardiology</option>
+                            <option>Pediatrics</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 5: address, full width -->
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="House, road, area">
+                    </div>
+                </div>
+
+                <!-- Row 6: problem description, full width (keep textarea on ONE line) -->
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="problem" class="form-label">Describe your problem</label>
+                        <textarea class="form-control" id="problem" rows="4" placeholder="Write your problem here"></textarea>
+                    </div>
+                </div>
+
+                <!-- Row 7: checkbox -->
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I accept the terms and conditions
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 8: buttons -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary px-5">Register</button>
+                        <button type="reset" class="btn btn-secondary px-5">Clear</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript (CDN). Without this, the navbar menu button will NOT work on mobile. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

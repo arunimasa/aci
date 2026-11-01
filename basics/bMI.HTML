@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BMI Calculator</title>
+
+  <!-- Bootstrap CSS (from a CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-5">
+
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h1 class="h3 mb-1">BMI Calculator</h1>
+            <p class="text-muted mb-4">Enter your weight and height to find your Body Mass Index.</p>
+
+            <!-- Weight input -->
+            <div class="mb-3">
+              <label for="weight" class="form-label">Weight (kg)</label>
+              <input type="number" id="weight" class="form-control" placeholder="e.g. 70" min="1">
+            </div>
+
+            <!-- Height unit selector -->
+            <div class="mb-3">
+              <label for="heightUnit" class="form-label">Height unit</label>
+              <select id="heightUnit" class="form-select">
+                <option value="cm">Centimeters (cm)</option>
+                <option value="ftin">Feet &amp; inches (ft/in)</option>
+              </select>
+            </div>
+
+            <!-- Height in cm -->
+            <div class="mb-3" id="cmGroup">
+              <label for="height" class="form-label">Height (cm)</label>
+              <input type="number" id="height" class="form-control" placeholder="e.g. 170" min="1">
+            </div>
+
+            <!-- Height in feet and inches (hidden by default) -->
+            <div class="mb-3 d-none" id="ftinGroup">
+              <label class="form-label">Height (ft / in)</label>
+              <div class="row g-2">
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="number" id="feet" class="form-control" placeholder="e.g. 5" min="0">
+                    <span class="input-group-text">ft</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="number" id="inches" class="form-control" placeholder="e.g. 7" min="0" max="11.99" step="any">
+                    <span class="input-group-text">in</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-grid gap-2">
+              <button id="calcBtn" class="btn btn-primary">Calculate BMI</button>
+              <button id="resetBtn" class="btn btn-outline-secondary">Reset</button>
+            </div>
+
+            <!-- Result appears here -->
+            <div id="result" class="mt-4"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Get the elements from the page
+    const weightInput = document.getElementById("weight");
+    const heightInput = document.getElementById("height");
+    const feetInput = document.getElementById("feet");
+    const inchesInput = document.getElementById("inches");
+    const heightUnit = document.getElementById("heightUnit");
+    const cmGroup = document.getElementById("cmGroup");
+    const ftinGroup = document.getElementById("ftinGroup");
+    const calcBtn = document.getElementById("calcBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const result = document.getElementById("result");
+
+    // 2. Show the right height fields when the unit changes
+    heightUnit.addEventListener("change", function () {
+      const useFtIn = heightUnit.value === "ftin";
+      cmGroup.classList.toggle("d-none", useFtIn);
+      ftinGroup.classList.toggle("d-none", !useFtIn);
+      result.innerHTML = "";
+    });
+
+    function showError(message) {
+      result.innerHTML = '<div class="alert alert-danger mb-0">' + message + '</div>';
+    }
+
+    // 3. Calculate when the button is clicked
+    calcBtn.addEventListener("click", function () {
+      const weight = parseFloat(weightInput.value); // kg
+      let heightM;                                  // height in meters
+
+      if (isNaN(weight) || weight <= 0) {
+        showError("Please enter a valid weight.");
+        return;
+      }
+
+      if (heightUnit.value === "cm") {
+        const heightCm = parseFloat(heightInput.value);
+        if (isNaN(heightCm) || heightCm <= 0) {
+          showError("Please enter a valid height in cm.");
+          return;
+        }
+        heightM = heightCm / 100;
+      } else {
+        const feet = parseFloat(feetInput.value) || 0;     // blank = 0
+        const inches = parseFloat(inchesInput.value) || 0; // blank = 0
+
+        if (feet < 0 || inches < 0 || inches >= 12 || (feet === 0 && inches === 0)) {
+          showError("Please enter a valid height (inches must be between 0 and 11.99).");
+          return;
+        }
+
+        // 1 ft = 12 in, 1 in = 2.54 cm
+        const totalInches = feet * 12 + inches;
+        heightM = (totalInches * 2.54) / 100;
+      }
+
+      // BMI = weight / (height * height)
+      const bmi = weight / (heightM * heightM);
+
+      // 4. Decide the category and the Bootstrap color
+      let category = "";
+      let color = "";
+
+      if (bmi < 18.5) {
+        category = "Underweight";
+        color = "info";
+      } else if (bmi < 25) {
+        category = "Normal weight";
+        color = "success";
+      } else if (bmi < 30) {
+        category = "Overweight";
+        color = "warning";
+      } else {
+        category = "Obese";
+        color = "danger";
+      }
+
+      // 5. Show the result
+      result.innerHTML =
+        '<div class="alert alert-' + color + ' mb-0 text-center">' +
+          '<div class="fs-2 fw-bold">' + bmi.toFixed(1) + '</div>' +
+          '<div>' + category + '</div>' +
+        '</div>';
+    });
+
+    // 6. Clear everything when Reset is clicked
+    resetBtn.addEventListener("click", function () {
+      weightInput.value = "";
+      heightInput.value = "";
+      feetInput.value = "";
+      inchesInput.value = "";
+      result.innerHTML = "";
+    });
+  </script>
+
+</body>
+</html>
